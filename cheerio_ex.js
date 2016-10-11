@@ -7,15 +7,18 @@ var util = require('util');
 var app = express();
 var port = 8000;
 
-var url = 'http://www.calottery.com/play';
+// var url = 'http://www.calottery.com/play';
+var megaUrl = 'http://www.calottery.com/play/draw-games/mega-millions';
 
-request(url, function(err, resp, body) {
+request(megaUrl, function(err, resp, body) {
   // pass body into cheerio and then parse the data
   // console.log('body', body);
   var $ = cheerio.load(body);
   // console.log('$', $);
-  var pageInfo = $('.number-balls');
-  // var animeTitleText = animeTitle.text();
+  var pageInfo = $('.winning_number_sm');
+  var pageInfoText = pageInfo.html();
+
+  var stripTagsPageInfo = pageInfoText.replace(/<li><span>/g, '').replace(/<\/span><\/li>/g, ',').replace('<li class="mega"><span>', ' mega: ');
 
   // var summary = $('.info');
   // var summaryText = summary.text();
@@ -25,8 +28,8 @@ request(url, function(err, resp, body) {
   //   summary: summaryText
   // };
 
-  console.log(pageInfo);
-  console.log(JSON.stringify(pageInfo, null, 2));
+  console.log(pageInfoText);
+  console.log(stripTagsPageInfo);
 });
 
 // get app running
