@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/boliv/money_cloud#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "cheerio": "^0.22.0",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
+    "mongoose": "^4.6.4",
     "path": "^0.12.7",
     "request": "^2.75.0"
   }

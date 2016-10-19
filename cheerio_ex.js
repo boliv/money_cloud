@@ -47,7 +47,7 @@ request(megaUrl, function(err, resp, body) {
     winnings[winningPrize[21]]= winningPrize[24],
     winnings[winningPrize[24]]= winningPrize[27];
 
-  console.log(winnings);
+  console.log('winnings', winnings);
 
   /********* PARSE DATA ********{}
   [[ null,
