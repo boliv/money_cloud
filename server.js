@@ -5,7 +5,7 @@
       mongoose = require('mongoose'),
       bodyParser = require('body-parser');
 
-  var Winner = require('./models/winnerModel')
+  var Winner = require('./models/winnerModel');
 
   var app = express();
 
@@ -14,9 +14,10 @@
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
-  var winnerRouter = require('./routes/winnerRoutes')(Winner);
+  // var winnerRouter = require('./routes/winnerRoutes.js')(Winner);
+  var winnerRouter = require('./routes/winnerRoutes.js');
 
-  // app.use('/api/winners', )
+  // app.use('/api/winners', winnerRouter);
 
   app.get('/', function (req, res) {
     res.send('Cloudy with a chance of retirement.');
