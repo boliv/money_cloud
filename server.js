@@ -5,12 +5,16 @@
       mongoose = require('mongoose'),
       bodyParser = require('body-parser');
 
+  var Winner = require('./models/winnerModel')
+
   var app = express();
 
   var port = process.env.PORT || 3000;
 
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
+
+  var winnerRouter = require('./routes/winnerRoutes')(Winner);
 
   // app.use('/api/winners', )
 
