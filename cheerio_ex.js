@@ -49,6 +49,8 @@ request(megaUrl, function(err, resp, body) {
 
   console.log('winnings', winnings);
 
+  
+
   /********* PARSE DATA ********{}
   [[ null,
   [ '5 + MEGA' ],
