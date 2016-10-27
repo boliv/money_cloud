@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+./**/node_modules
+notes.txt
+./**/.env
+./money_cloud/.env
+money_cloud/.env
+.env
