@@ -5,9 +5,16 @@
       mongoose = require('mongoose'),
       bodyParser = require('body-parser');
 
-  var Winner = require('./models/winnerModel');
+  require('dotenv').config();
 
-  var db = mongoose.connect('mongodb://localhost/winnersAPI_test');
+  var db;
+  if (process.env.ENV === 'development') {
+    db = mongoose.connect('mongodb://localhost/money_cloud_test');
+  } else {
+    db = mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST);
+  }
+
+  var Winner = require('./models/winnerModel');
 
   var app = express();
 
