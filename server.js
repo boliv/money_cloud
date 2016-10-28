@@ -8,6 +8,7 @@
   require('dotenv').config();
 
   var db;
+  console.log('process.env.ENV', process.env.ENV);
   if (process.env.ENV === 'development') {
     db = mongoose.connect('mongodb://localhost/money_cloud_test');
   } else {
