@@ -9,11 +9,11 @@
 
   var db;
   console.log('process.env.ENV', process.env.ENV);
-  if (process.env.ENV === 'development') {
-    db = mongoose.connect('mongodb://localhost/money_cloud_test');
-  } else {
+  // if (process.env.ENV === 'development') {
+    // db = mongoose.connect('mongodb://localhost/money_cloud_test');
+  // } else {
     db = mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST);
-  }
+  // }
 
   var Winner = require('./models/winnerModel');
 
