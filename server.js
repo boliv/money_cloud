@@ -8,10 +8,17 @@
   require('dotenv').config();
 
   var db;
+  var uristring = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
   if (process.env.ENV === 'development') {
-    db = mongoose.connect('mongodb://localhost/money_cloud_test');
+    db = mongoose.connect('mongodb://localhost/winners_test');
   } else {
-    db = mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST);
+    db = mongoose.connect(uristring, function (err, res) {
+      if (err) {
+      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+      } else {
+      console.log ('Succeeded connected to: ' + uristring);
+      }
+    });
   }
 
   var Winner = require('./models/winnerModel');
