@@ -7,6 +7,8 @@
 
   require('dotenv').config();
 
+  // Setting database
+
   var db;
   var uristring = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + process.env.DB_HOST;
   if (process.env.ENV === 'development') {
@@ -30,6 +32,8 @@
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
+  // Routes
+
   var winnerRouter = require('./routes/winnerRoutes')(Winner);
   //var winnerRouter = require('./routes/winnerRoutes.js');
 
@@ -42,6 +46,9 @@
   app.listen(port, function () {
     console.log('money line on port: ' + port);
   });
+
+  // Calling Master chief of all cron Jobs
+  var chief = require('./cron_jobs/chief_master')();
 
   module.exports = app;
 
