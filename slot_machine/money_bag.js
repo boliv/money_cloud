@@ -7,15 +7,15 @@
     var moneyBag = function(Winner){
   		
       var mega = function(){
-        winnersParser('http://www.calottery.com/play/draw-games/mega-millions', 'mega');
+        winnersParser('http://www.calottery.com/play/draw-games/mega-millions', 'mega-' + JSON.stringify(Date.now()));
   		}
 
   		var power = function(){
-        winnersParser('http://www.calottery.com/play/draw-games/powerball', 'power');
+        winnersParser('http://www.calottery.com/play/draw-games/powerball', 'power-' + JSON.stringify(Date.now()));
   		}
 
       var lotto = function(){
-        winnersParser('http://www.calottery.com/play/draw-games/superlotto-plus', 'lotto');
+        winnersParser('http://www.calottery.com/play/draw-games/superlotto-plus', 'lotto-' + JSON.stringify(Date.now()));
       }
 
       // Helper function
@@ -33,8 +33,21 @@
           var stripTagsPageInfo = pageInfoText.replace(/<li><span>/g, '').replace(/<\/span><\/li>/g, ',').replace('<li class="mega"><span>', ' mega: ');
 
           
+          var splitWinningNumbers = stripTagsPageInfo.split(",");
+          var winningNumbers = [];
+          splitWinningNumbers.forEach(function(n) {
+            winningNumbers.push(n.match(/\d+/g));
+          });
+
+          winningNumbers = [].concat.apply([], winningNumbers);
+          winningNumbers.pop();
+
+          //console.log(winningNumbers);
+          
           var details = $('.draw_games tbody');
           var detailsText = details.html();
+
+          //console.log(detailsText);
 
           var splitDetailsText = detailsText.split("<td>");
           var winningPrizeRaw = [];
@@ -45,31 +58,38 @@
           });
           //winningPrize = winningPrize[0];
           // console.log(winningPrizeRaw);
-          var winningPrize = [].concat.apply([],winningPrizeRaw.map(function(w) { return (w != null) ? w.join(',') : '' }));
-          console.log(winningPrize);
+          var prize = [].concat.apply([],winningPrizeRaw.map(function(w) { return (w != null) ? w.join(',') : '' }));
+          //console.log(winningPrize);
 
           var winnings = {};
-            winnings[winningPrize[1]]= winningPrize[3],
-            winnings[winningPrize[1]]= winningPrize[3],
-            winnings[winningPrize[4]]= winningPrize[6],
-            winnings[winningPrize[7]]= winningPrize[9],
-            winnings[winningPrize[10]]= winningPrize[12],
-            winnings[winningPrize[13]]= winningPrize[15],
-            winnings[winningPrize[16]]= winningPrize[18],
-            winnings[winningPrize[19]]= winningPrize[21],
-            winnings[winningPrize[21]]= winningPrize[24],
-            winnings[winningPrize[24]]= winningPrize[27];
+            winnings[prize[1]]= prize[3],
+            winnings[prize[1]]= prize[3],
+            winnings[prize[4]]= prize[6],
+            winnings[prize[7]]= prize[9],
+            winnings[prize[10]]= prize[12],
+            winnings[prize[13]]= prize[15],
+            winnings[prize[16]]= prize[18],
+            winnings[prize[19]]= prize[21],
+            winnings[prize[21]]= prize[24],
+            winnings[prize[24]]= prize[27];
 
-          console.log('winnings', winnings);
+          console.log('winningPrize', winnings);
 
-          var winningNumbers = {
+          console.log('winningNumbers', winningNumbers);
+
+          var data = {
             lotteryName: name,
-            winningNumbers: winnings
+            winningPrizes: winnings,
+            winningNumbers: winningNumbers
           }
 
-          var winner = new Winner(winningNumbers);
-          console.log(winner);
-          winner.save();
+          var winner = new Winner(data);
+          
+          console.log('winner', winner);
+          
+          winner.save(function (err) {
+                    console.log(err);
+                });
         })
       }
 

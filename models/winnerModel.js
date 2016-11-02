@@ -6,26 +6,48 @@
 
   var winnerModel = new Schema({
       lotteryName: {type: String, unique: true, index: true},
-      winningNumbers: {type: Object}
+      winningPrizes: {type: Object},
+      winningNumbers: {type: Array},
+      drawDate: {type: Date, default: Date.now}
   });
 
   /************* DB ************
   {
-    "lotteryName": "Mega"
-    "winningNumbers": {
-      {
-        "10-12-16": {
-          "5 + MEGA": "41,000,000",
-          "5": "43,879",
-          "4 + MEGA": "1,828",
-          "4": "96",
-          "3 + MEGA": "61",
-          "3": "10",
-          "2 + MEGA": "11",
-          "1 + MEGA": "2",
-          "MEGA": "1"
-        }
-      }
+    "lotteryName": "Mega",
+    "10-12-16": {
+      "winningPrizes": {
+            "5 + MEGA": "41,000,000",
+            "5": "43,879",
+            "4 + MEGA": "1,828",
+            "4": "96",
+            "3 + MEGA": "61",
+            "3": "10",
+            "2 + MEGA": "11",
+            "1 + MEGA": "2",
+            "MEGA": "1"
+      },
+      "winningNumbers": [
+
+      ]
+    }
+  },
+  {
+    "lotteryName": "Mega",
+    "10-18-16": {
+      "winningPrizes": {  
+            "5 + MEGA": "41,000,000",
+            "5": "43,879",
+            "4 + MEGA": "1,828",
+            "4": "96",
+            "3 + MEGA": "61",
+            "3": "10",
+            "2 + MEGA": "11",
+            "1 + MEGA": "2",
+            "MEGA": "1"
+      },
+      "winningNumbers": [
+
+      ]
     },
   {
     lotteryName: "Power Ball"
