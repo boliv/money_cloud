@@ -40,7 +40,15 @@
   app.use('/api/winners', winnerRouter);
 
   app.get('/', function (req, res) {
-    res.send('Cloudy with a chance of retirement.');
+    //res.send('Cloudy with a chance of retirement.');
+    res.sendFile(__dirname + '/index.html');
+  });
+
+  app.get('/fetch_numbers', function (req, res) {
+    var MoneyBag = require('./slot_machine/money_bag')(Winner);
+    // MoneyBag.lotto();  
+    MoneyBag.power();  
+    // MoneyBag.mega();
   });
 
   app.listen(port, function () {

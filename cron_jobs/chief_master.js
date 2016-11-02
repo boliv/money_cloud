@@ -6,11 +6,15 @@
   
   var CronJob = require('cron').CronJob;
 
+  console.log("Lottery crons started");
+
   var lotteryCrons = function(){
 
     var lottoJob = new CronJob({
-      cronTime: '00 45 21 * * 3,6',
+      //cronTime: '00 45 21 * * 3,6',
+      cronTime: '00 00 22 * * 2',
       onTick: function() {
+        console.log("fetching lotto");
         /*
          * Runs every (Wednesday and Saturday)
          * at 21:45:00 PM.
@@ -19,11 +23,13 @@
       },
       timeZone: 'America/Los_Angeles'
     });
-    lottoJob.start();
+    // lottoJob.start();
 
     var powerJob = new CronJob({
-      cronTime: '00 45 21 * * 3,6',
+      // cronTime: '00 45 21 * * 3,6',
+      cronTime: '00 03 22 * * 2',
       onTick: function() {
+        console.log("fetching power");
         /*
          * Runs every (Wednesday and Saturday)
          * at 21:45:00 PM.
@@ -45,7 +51,7 @@
       },
       timeZone: 'America/Los_Angeles'
     });
-    megaJob.start();
+    // megaJob.start();
 
   }
 
