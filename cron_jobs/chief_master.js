@@ -23,7 +23,7 @@
       },
       timeZone: 'America/Los_Angeles'
     });
-    // lottoJob.start();
+    lottoJob.start();
 
     var powerJob = new CronJob({
       // cronTime: '00 45 21 * * 3,6',
@@ -51,7 +51,7 @@
       },
       timeZone: 'America/Los_Angeles'
     });
-    // megaJob.start();
+    megaJob.start();
 
   }
 

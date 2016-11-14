@@ -5,10 +5,11 @@
       Schema = mongoose.Schema;
 
   var winnerModel = new Schema({
-      lotteryName: {type: String, unique: true, index: true},
+      lotteryName: {type: String},
       winningPrizes: {type: Object},
-      drawDate: {type: Date, default: Date.now}
-      winningDate: {type: String, unique: true},
+      // fetchDate: {type: String, default: dateFormat(Date.now(), 'YYYY-MM'), unique: true},
+      // fetchDate: {type: String},
+      winningDate: {type: String},
       winningNumbers: {type: Object}
   });
 
