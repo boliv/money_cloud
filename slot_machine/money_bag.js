@@ -7,15 +7,15 @@
     var moneyBag = function(Winner){
   		
       var mega = function(){
-        winnersParser('http://www.calottery.com/play/draw-games/mega-millions', 'mega-' + JSON.stringify(Date.now()));
+        winnersParser('http://www.calottery.com/play/draw-games/mega-millions', 'mega');
   		}
 
   		var power = function(){
-        winnersParser('http://www.calottery.com/play/draw-games/powerball', 'power-' + JSON.stringify(Date.now()));
+        winnersParser('http://www.calottery.com/play/draw-games/powerball', 'power');
   		}
 
       var lotto = function(){
-        winnersParser('http://www.calottery.com/play/draw-games/superlotto-plus', 'lotto-' + JSON.stringify(Date.now()));
+        winnersParser('http://www.calottery.com/play/draw-games/superlotto-plus', 'lotto');
       }
 
       // Helper function
@@ -27,6 +27,15 @@
           // console.log('body', body);
           var $ = cheerio.load(body);
           // console.log('$', $);
+
+          /*********** WINNINGDATE ***************/
+          var dateDrawRaw = $('.date');
+          var dateDrawRawDOM = dateDrawRaw.html();
+          var dateDrawOnly = dateDrawRawDOM.split('|');
+          var winningDate = dateDrawOnly[0].trim();
+
+
+          /*********** WINNING NUMBERS ***************/
           var pageInfo = $('.winning_number_sm');
           var pageInfoText = pageInfo.html();
 
@@ -44,6 +53,8 @@
 
           //console.log(winningNumbers);
           
+
+          /*********** WINNING PRIZE ***************/
           var details = $('.draw_games tbody');
           var detailsText = details.html();
 
@@ -79,6 +90,7 @@
 
           var data = {
             lotteryName: name,
+            winningDate: winningDate,
             winningPrizes: winnings,
             winningNumbers: winningNumbers
           }

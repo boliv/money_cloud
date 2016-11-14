@@ -46,9 +46,9 @@
 
   app.get('/fetch_numbers', function (req, res) {
     var MoneyBag = require('./slot_machine/money_bag')(Winner);
-    // MoneyBag.lotto();  
+    MoneyBag.lotto();  
     MoneyBag.power();  
-    // MoneyBag.mega();
+    MoneyBag.mega();
   });
 
   app.listen(port, function () {
