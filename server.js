@@ -5,7 +5,10 @@
       mongoose = require('mongoose'),
       bodyParser = require('body-parser');
 
-  require('dotenv').config();
+  if (process.env.ENV !== 'development') {
+    require('dotenv').config();
+  }
+  
 
   // Setting database
 
