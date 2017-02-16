@@ -51,16 +51,16 @@
           winningNumbers = [].concat.apply([], winningNumbers);
           winningNumbers.pop();
 
-          //console.log(winningNumbers);
+          console.log(winningNumbers);
           
 
           /*********** WINNING PRIZE ***************/
           var details = $('.draw_games tbody');
           var detailsText = details.html();
 
-          //console.log(detailsText);
+          console.log(name);
 
-          var splitDetailsText = detailsText.split("<td>");
+          var splitDetailsText = detailsText ? detailsText.split("<td>") : [];
           var winningPrizeRaw = [];
           splitDetailsText.map(function(t){
             // console.log(t);
@@ -72,24 +72,31 @@
           var prize = [].concat.apply([],winningPrizeRaw.map(function(w) { return (w != null) ? w.join(',') : '' }));
           //console.log(winningPrize);
 
+          console.log('prize', prize);
+
           var winnings = {};
-            winnings[prize[1]]= prize[3],
-            winnings[prize[1]]= prize[3],
-            winnings[prize[4]]= prize[6],
-            winnings[prize[7]]= prize[9],
-            winnings[prize[10]]= prize[12],
-            winnings[prize[13]]= prize[15],
-            winnings[prize[16]]= prize[18],
-            winnings[prize[19]]= prize[21],
-            winnings[prize[21]]= prize[24],
-            winnings[prize[24]]= prize[27];
+
+          if(prize.length > 0) {
+
+              winnings[prize[1]]= prize[3],
+              winnings[prize[1]]= prize[3],
+              winnings[prize[4]]= prize[6],
+              winnings[prize[7]]= prize[9],
+              winnings[prize[10]]= prize[12],
+              winnings[prize[13]]= prize[15],
+              winnings[prize[16]]= prize[18],
+              winnings[prize[19]]= prize[21],
+              winnings[prize[21]]= prize[24],
+              winnings[prize[24]]= prize[27];
+
+          }
 
           console.log('winningPrize', winnings);
 
           console.log('winningNumbers', winningNumbers);
 
           var data = {
-            lotteryName: name,
+            lotteryName: name + "." + Date.now(),
             winningDate: winningDate,
             winningPrizes: winnings,
             winningNumbers: winningNumbers
@@ -100,8 +107,8 @@
           console.log('winner', winner);
           
           winner.save(function (err) {
-                    console.log(err);
-                });
+            console.log('err', err);
+          });
         })
       }
 
