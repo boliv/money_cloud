@@ -5,7 +5,7 @@
       mongoose = require('mongoose'),
       bodyParser = require('body-parser');
 
-  if (process.env.ENV !== 'development') {
+  if (process.env.ENV === 'development') {
     require('dotenv').config();
   }
   
